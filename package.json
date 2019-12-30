@@ -2,13 +2,21 @@
   "name": "react-native-segmented-control",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.ts",
+  "types": "lib/index.d.ts",
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
   "scripts": {
+    "build": "rm -rf lib && tsc",
+    "prepublish": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^13.1.2",
+    "@types/react-native": "^0.60.27",
     "react": "^16.12.0",
     "react-native": "^0.61.5",
     "react-native-gesture-handler": "^1.5.2",

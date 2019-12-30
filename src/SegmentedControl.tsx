@@ -7,7 +7,7 @@ import Segment from "./Segment";
 export interface SegmentedControlProps {
   inactiveTintColor?: string;
   activeTintColor?: string;
-  onChangeValue?: (index) => void;
+  onChangeValue?: (index: number) => void;
   selectedIndex?: number;
   style?: StyleProp<ViewStyle>;
   values: string[];
@@ -30,7 +30,7 @@ const SegmentedControl = ({
   );
   const [_sliderWidth, _setSliderWidth] = useState(0);
 
-  const handleChangeValue = index => {
+  const handleChangeValue = (index: number) => {
     if (typeof _activeIndex === "undefined") {
       _setSliderPosition(new Animated.Value(_width * (index / values.length)));
     }
