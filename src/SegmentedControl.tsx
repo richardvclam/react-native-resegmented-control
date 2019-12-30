@@ -8,22 +8,22 @@ export interface SegmentedControlProps {
   inactiveTintColor?: string;
   activeTintColor?: string;
   onChangeValue?: (index: number) => void;
-  selectedIndex?: number;
+  defaultSelectedIndex?: number;
   style?: StyleProp<ViewStyle>;
   values: string[];
 }
 
-const SegmentedControl = ({
+export const SegmentedControl = ({
   inactiveTintColor,
   activeTintColor,
   onChangeValue = () => {},
-  selectedIndex,
+  defaultSelectedIndex,
   style,
   values
 }: SegmentedControlProps) => {
   const [_width, _setWidth] = useState<number>(0);
   const [_activeIndex, _setActiveIndex] = useState<number | undefined>(
-    selectedIndex
+    defaultSelectedIndex
   );
   const [_sliderPosition, _setSliderPosition] = useState(
     new Animated.Value<number>(0)
@@ -42,6 +42,14 @@ const SegmentedControl = ({
   useEffect(() => {
     _setSliderWidth(_width * (1 / values.length - 0.015));
   }, [values, _width]);
+
+  useEffect(() => {
+    if (typeof defaultSelectedIndex !== "undefined") {
+      _setSliderPosition(
+        new Animated.Value(_width * (defaultSelectedIndex / values.length))
+      );
+    }
+  }, [values, _width, defaultSelectedIndex]);
 
   // This hook is used to animate the slider position
   Animated.useCode(() => {
@@ -126,7 +134,6 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     zIndex: 1
   },
-
   dividerContainer: {
     paddingTop: 7,
     paddingBottom: 7,
