@@ -2,6 +2,8 @@
 
 React Native Resegmented Control is a declarative component that mimics the look and feel of iOS 13 `UISegmentedControl`.
 
+![Image](https://giant.gfycat.com/WhichChubbyAcornweevil.gif)
+
 ## Installation
 
 1\. First install the library from npm using yarn or npm
