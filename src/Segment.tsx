@@ -1,41 +1,52 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleProp, StyleSheet, Text, View, ViewStyle } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { SegmentedContext } from "./SegmentedControl";
 
-interface SegmentProps {
-  active?: boolean;
+export interface SegmentProps {
   activeTintColor?: string;
   content: string;
   inactiveTintColor?: string;
-  onChangeValue?: () => void;
+  name: string;
   style?: StyleProp<ViewStyle>;
 }
 
-const Segment = ({
-  active = false,
+export const Segment = ({
   activeTintColor,
   content,
+  name,
   inactiveTintColor,
-  onChangeValue,
   style
-}: SegmentProps) => (
-  <View style={[styles.container, style as ViewStyle]}>
-    <TouchableOpacity onPress={onChangeValue}>
-      <View style={styles.segment}>
-        <Text
-          numberOfLines={1}
-          style={[
-            styles.segmentText,
-            active ? { color: activeTintColor } : { color: inactiveTintColor },
-            active && styles.segmentActiveText
-          ]}
-        >
-          {content}
-        </Text>
-      </View>
-    </TouchableOpacity>
-  </View>
-);
+}: SegmentProps) => {
+  const { selectedName, onChange } = useContext(SegmentedContext);
+
+  const active = selectedName === name;
+
+  const handlePress = () => {
+    onChange(name);
+  };
+
+  return (
+    <View style={[styles.container, style as ViewStyle]}>
+      <TouchableOpacity onPress={handlePress}>
+        <View style={styles.segment}>
+          <Text
+            numberOfLines={1}
+            style={[
+              styles.segmentText,
+              active
+                ? { color: activeTintColor }
+                : { color: inactiveTintColor },
+              active && styles.segmentActiveText
+            ]}
+          >
+            {content}
+          </Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -60,5 +71,3 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   }
 });
-
-export default Segment;

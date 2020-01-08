@@ -1,8 +1,6 @@
 # React Native Resegmented Control
 
-**React Native's Segmented Control component reimplemented**
-
-React Native Resegmented Control is a pure JS component that mimics the look and feel of iOS 13 `UISegmentedControl`.
+React Native Resegmented Control is a declarative component that mimics the look and feel of iOS 13 `UISegmentedControl`.
 
 ## Installation
 
@@ -25,13 +23,16 @@ React Native Resegmented Control is a pure JS component that mimics the look and
 ## Example
 
 ```jsx
-import { SegmentedControl } from "react-native-resegmented-control";
+import { SegmentedControl, Segment } from "react-native-resegmented-control";
 
 <SegmentedControl
-  defaultSelectedIndex={1}
-  values={["One", "Two"]}
-  inactiveTintColor="white"
   activeTintColor="black"
-  onChangeValue={(value: number) => setValue(value)}
-/>;
+  inactiveTintColor="white"
+  initialSelectedName="two"
+  onChangeValue={(name: string) => setSelectedSegment(name)}
+  style={[styles.segmentedControl]}
+>
+  <Segment name="one" content="One" />
+  <Segment name="two" content="Two" />
+</SegmentedControl>;
 ```

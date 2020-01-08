@@ -13,10 +13,10 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "noImplicitAny": true,
+    // "noImplicitAny": true,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true,
+    // "noUnusedLocals": true,
     "declaration": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
@@ -25,6 +25,6 @@
     "esModuleInterop": true,
     "typeRoots": ["./@types", "./node_modules/@types"]
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "lib", "scripts"]
+  "include": ["src/**/*", "__tests__"],
+  "exclude": ["node_modules", "lib", "scripts", "__tests__"]
 }
