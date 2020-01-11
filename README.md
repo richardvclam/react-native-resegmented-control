@@ -38,7 +38,7 @@ While any of the other libraries would do the job, none of them comes with the n
 ## Example
 
 ```jsx
-import { SegmentedControl, Segment } from "react-native-resegmented-control";
+import { SegmentedControl, Segment } from 'react-native-resegmented-control';
 
 <SegmentedControl
   activeTintColor="black"
@@ -54,6 +54,5 @@ import { SegmentedControl, Segment } from "react-native-resegmented-control";
 
 ## To Dos
 
-- Support for swiping the slider
 - More customizable options
 - Pixel perfect to native design
