@@ -1,8 +1,21 @@
+[![npm](https://img.shields.io/npm/v/react-native-resegmented-control)](https://www.npmjs.com/package/react-native-resegmented-control)
+
 # React Native Resegmented Control
 
-React Native Resegmented Control is a declarative component that mimics the look and feel of iOS 13 `UISegmentedControl`.
+React Native Resegmented Control is a fully customizable, declarative component that mimics the design of `UISegmentedControl` from iOS 13. Supported on iOS and Android.
 
 ![Image](https://giant.gfycat.com/WhichChubbyAcornweevil.gif)
+
+## Motivation
+
+We wanted to use the new segmented control in our app, but there are a few issues with the native component `SegmentedControlIOS`.
+
+1. The new design is only available on iOS 13 and above - say bye to app support for older versions.
+2. The component is not fully customizable.
+3. There is no equivalent component for Android - boo.
+
+**Why not use one of the other existing libaries?**
+While any of the other libraries would do the job, none of them comes with the new iOS 13 design out of the box. We really wanted the fancy slider animation. 😎
 
 ## Installation
 
@@ -38,3 +51,9 @@ import { SegmentedControl, Segment } from "react-native-resegmented-control";
   <Segment name="two" content="Two" />
 </SegmentedControl>;
 ```
+
+## To Dos
+
+- Support for swiping the slider
+- More customizable options
+- Pixel perfect to native design
