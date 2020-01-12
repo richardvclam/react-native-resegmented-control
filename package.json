@@ -1,14 +1,14 @@
 {
   "name": "react-native-resegmented-control",
   "version": "2.1.0",
-  "description": "",
+  "description": "A fully customizable, declarative component that mimics the design of UISegmentedControl from iOS 13. Supported on iOS and Android",
   "keywords": [
-    "react",
-    "native",
+    "react-native",
     "segmented",
     "control",
     "resegmented",
-    "uisegmentedcontrol"
+    "UISegmentedControl",
+    "SegmentedControlIOS"
   ],
   "repository": {
     "type": "git",
@@ -21,8 +21,9 @@
   ],
   "scripts": {
     "build": "rm -rf lib && tsc",
-    "prepublish": "npm run build",
-    "test": "jest"
+    "prepare": "npm run build",
+    "test": "jest",
+    "lint": "tsc --noEmit && eslint \"{src,__tests__}/**/*.{js,jsx,ts,tsx}\" --quiet --fix"
   },
   "author": "",
   "license": "ISC",
@@ -34,7 +35,19 @@
     "@types/jest": "^24.0.25",
     "@types/node": "^13.1.2",
     "@types/react-native": "^0.60.27",
+    "@typescript-eslint/eslint-plugin": "^2.15.0",
+    "@typescript-eslint/parser": "^2.15.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "eslint-plugin-react-native": "^3.8.1",
     "jest": "^24.9.0",
+    "prettier": "^1.19.1",
+    "prettier-eslint": "^9.0.1",
     "react": "^16.12.0",
     "react-native": "^0.61.5",
     "react-native-gesture-handler": "^1.5.2",

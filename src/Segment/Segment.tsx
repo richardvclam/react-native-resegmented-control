@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
-import { StyleProp, StyleSheet, Text, View, ViewStyle } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { SegmentedContext } from "./SegmentedControl";
+import React, { useContext } from 'react';
+import { StyleProp, Text, View, ViewStyle } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { SegmentedContext } from '../SegmentedControl/SegmentedControl';
+import styles from './SegmentStyles';
 
 export interface SegmentProps {
   activeTintColor?: string;
@@ -16,14 +17,16 @@ export const Segment = ({
   content,
   name,
   inactiveTintColor,
-  style
-}: SegmentProps) => {
+  style,
+}: SegmentProps): JSX.Element => {
   const { selectedName, onChange } = useContext(SegmentedContext);
 
   const active = selectedName === name;
 
-  const handlePress = () => {
-    onChange(name);
+  const handlePress = (): void => {
+    if (typeof onChange === 'function') {
+      onChange(name);
+    }
   };
 
   return (
@@ -37,7 +40,7 @@ export const Segment = ({
               active
                 ? { color: activeTintColor }
                 : { color: inactiveTintColor },
-              active && styles.segmentActiveText
+              active && styles.segmentActiveText,
             ]}
           >
             {content}
@@ -47,27 +50,3 @@ export const Segment = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    zIndex: 2
-  },
-  segment: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  segmentText: {
-    fontSize: 13,
-    paddingLeft: 2,
-    paddingRight: 2,
-    width: "100%",
-    textAlign: "center"
-  },
-  segmentActiveText: {
-    fontWeight: "bold"
-  }
-});

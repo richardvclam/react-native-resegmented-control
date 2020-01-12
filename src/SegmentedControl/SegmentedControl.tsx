@@ -1,10 +1,14 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import { LayoutChangeEvent, StyleProp, View, ViewStyle } from 'react-native';
 import Animated, { Easing } from 'react-native-reanimated';
 import { timing } from 'react-native-redash';
-import { Segment, SegmentProps } from './Segment';
-import { PanGestureHandler } from 'react-native-gesture-handler';
-import { clamp } from './utils';
+import {
+  PanGestureHandler,
+  PanGestureHandlerGestureEvent,
+} from 'react-native-gesture-handler';
+import { Segment, SegmentProps } from '../Segment';
+import { clamp } from '../utils';
+import styles from './SegmentedControlStyles';
 
 export interface SegmentedControlProps {
   activeTintColor?: string;
@@ -19,10 +23,10 @@ export interface SegmentedControlProps {
 
 export const SegmentedContext = createContext<{
   selectedName: string | null | undefined;
-  onChange: (string) => void;
+  onChange: ((name: string) => void) | undefined;
 }>({
   selectedName: null,
-  onChange: (name: string) => {},
+  onChange: undefined,
 });
 
 export const SegmentedControl = ({
@@ -30,9 +34,9 @@ export const SegmentedControl = ({
   children,
   inactiveTintColor = 'black',
   initialSelectedName,
-  onChangeValue = () => {},
+  onChangeValue,
   style,
-}: SegmentedControlProps) => {
+}: SegmentedControlProps): JSX.Element => {
   const [_width, _setWidth] = useState<number>(0);
   const [_activeName, _setActiveName] = useState<string | undefined>(
     initialSelectedName,
@@ -96,22 +100,27 @@ export const SegmentedControl = ({
     );
   }, [_activeName]);
 
-  const handleChangeValue = (name: string) => {
-    if (typeof _activeName === 'undefined') {
-      const index = _map![name];
+  const handleLayout = (event: LayoutChangeEvent): void =>
+    _setWidth(event.nativeEvent.layout.width);
+
+  const handleChangeValue = (name: string): void => {
+    if (typeof _activeName === 'undefined' && typeof _map !== 'undefined') {
+      const index = _map[name];
       _setSliderPosition(new Animated.Value(_width * (index / values.length)));
     }
     _setActiveName(name);
 
-    onChangeValue(name);
+    if (typeof onChangeValue === 'function') {
+      onChangeValue(name);
+    }
   };
 
-  const handleGestureEvent = event => {
+  const handleGestureEvent = (event: PanGestureHandlerGestureEvent): void => {
     const { x } = event.nativeEvent;
 
     const calculatedIndex = Math.floor((x / _width) * values.length);
     const index = clamp(calculatedIndex, 0, values.length - 1);
-    const name = values[index].props.name;
+    const { name } = values[index].props;
 
     handleChangeValue(name);
   };
@@ -122,12 +131,11 @@ export const SegmentedControl = ({
     >
       <PanGestureHandler onGestureEvent={handleGestureEvent}>
         <View
-          onLayout={event => _setWidth(event.nativeEvent.layout.width)}
+          onLayout={handleLayout}
           style={[styles.container, style as ViewStyle]}
         >
           {typeof _activeName !== 'undefined' && (
             <Animated.View
-              // @ts-ignore
               style={[
                 styles.slider,
                 {
@@ -142,65 +150,27 @@ export const SegmentedControl = ({
             />
           )}
 
-          {values.map((child, index) => {
-            return (
-              <React.Fragment key={child.props.name}>
-                {index > 0 && (
-                  <View style={styles.dividerContainer}>
-                    <View style={styles.divider} />
-                  </View>
-                )}
-                {{
-                  ...child,
-                  props: {
-                    ...child.props,
-                    inactiveTintColor,
-                    activeTintColor,
-                  },
-                }}
-              </React.Fragment>
-            );
-          })}
+          {values.map((child, index) => (
+            <React.Fragment key={child.props.name}>
+              {index > 0 && (
+                <View style={styles.dividerContainer}>
+                  <View style={styles.divider} />
+                </View>
+              )}
+              {{
+                ...child,
+                props: {
+                  ...child.props,
+                  inactiveTintColor,
+                  activeTintColor,
+                },
+              }}
+            </React.Fragment>
+          ))}
         </View>
       </PanGestureHandler>
     </SegmentedContext.Provider>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#eeeeef',
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderRadius: 8,
-    height: 28,
-    position: 'relative',
-  },
-  slider: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    height: '86%',
-    backgroundColor: 'white',
-    borderRadius: 7,
-    margin: 2,
-    shadowOffset: { width: 0.95, height: 0.95 },
-    shadowColor: '#a2a2a2',
-    shadowOpacity: 0.5,
-    shadowRadius: 2,
-    zIndex: 1,
-  },
-  dividerContainer: {
-    paddingTop: 7,
-    paddingBottom: 7,
-    zIndex: 0,
-  },
-  divider: {
-    height: '100%',
-    width: 1,
-    borderWidth: 0,
-    backgroundColor: 'rgba(120, 120, 120, 0.2)',
-  },
-});
 
 export default SegmentedControl;
