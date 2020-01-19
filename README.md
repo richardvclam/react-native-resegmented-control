@@ -52,6 +52,52 @@ import { SegmentedControl, Segment } from 'react-native-resegmented-control';
 </SegmentedControl>;
 ```
 
+## SegmentedControl
+
+### `activeTintColor`
+
+Color of the active content.
+
+| Type   | Required | Default   |
+| ------ | -------- | --------- |
+| string | No       | `#000000` |
+
+### `inactiveTintColor`
+
+Color of the inactive content.
+
+| Type   | Required | Default   |
+| ------ | -------- | --------- |
+| string | No       | `#000000` |
+
+### `initialSelectedName`
+
+Name of the segment to initially select.
+
+| Type   | Required |
+| ------ | -------- |
+| string | No       |
+
+### `onChangeValue`
+
+Callback that is called when the user taps a segment. Passes the `name` of the `Segment` as an argument.
+
+| Type     | Required |
+| -------- | -------- |
+| function | No       |
+
+```ts
+function onChangeValue(name: string): void {}
+```
+
+### `style`
+
+Style of the segmented control. Uses the same styles as a `View` component.
+
+| Type      | Required |
+| --------- | -------- |
+| ViewStyle | No       |
+
 ## To Dos
 
 - More customizable options
