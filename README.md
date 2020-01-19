@@ -98,6 +98,32 @@ Style of the segmented control. Uses the same styles as a `View` component.
 | --------- | -------- |
 | ViewStyle | No       |
 
+## Segment
+
+### `content`
+
+Element for the segment.
+
+| Type    | Required |
+| ------- | -------- |
+| Element | Yes      |
+
+### `name`
+
+Unique name used to identify each segment.
+
+| Type   | Required |
+| ------ | -------- |
+| string | Yes      |
+
+### `style`
+
+Style of the segment. Uses the same styles as a `View` component.
+
+| Type      | Required |
+| --------- | -------- |
+| ViewStyle | No       |
+
 ## To Dos
 
 - More customizable options
