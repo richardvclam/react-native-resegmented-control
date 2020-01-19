@@ -13,11 +13,11 @@ import styles from './SegmentedControlStyles';
 export interface SegmentedControlProps {
   activeTintColor?: string;
   inactiveTintColor?: string;
-  onChangeValue?: (name: string) => void;
   initialSelectedName?: string;
   children:
     | React.ReactElement<SegmentProps>
     | React.ReactElement<SegmentProps>[];
+  onChangeValue?: (name: string) => void;
   style?: StyleProp<ViewStyle>;
 }
 
@@ -30,9 +30,9 @@ export const SegmentedContext = createContext<{
 });
 
 export const SegmentedControl = ({
-  activeTintColor = 'black',
+  activeTintColor = '#000000',
   children,
-  inactiveTintColor = 'black',
+  inactiveTintColor = '#000000',
   initialSelectedName,
   onChangeValue,
   style,

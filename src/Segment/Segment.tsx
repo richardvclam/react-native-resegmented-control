@@ -6,7 +6,7 @@ import styles from './SegmentStyles';
 
 export interface SegmentProps {
   activeTintColor?: string;
-  content: string;
+  content: React.ReactNode;
   inactiveTintColor?: string;
   name: string;
   style?: StyleProp<ViewStyle>;
@@ -15,8 +15,8 @@ export interface SegmentProps {
 export const Segment = ({
   activeTintColor,
   content,
-  name,
   inactiveTintColor,
+  name,
   style,
 }: SegmentProps): JSX.Element => {
   const { selectedName, onChange } = useContext(SegmentedContext);
@@ -29,23 +29,37 @@ export const Segment = ({
     }
   };
 
+  const renderContent = (): React.ReactNode => {
+    if (
+      typeof content === 'string' ||
+      typeof content === 'number' ||
+      typeof content === 'boolean'
+    ) {
+      return (
+        <Text
+          numberOfLines={1}
+          style={[
+            styles.segmentText,
+            active ? { color: activeTintColor } : { color: inactiveTintColor },
+            active && styles.segmentActiveText,
+          ]}
+        >
+          {content}
+        </Text>
+      );
+    }
+
+    if (typeof content === 'function') {
+      return content({ activeTintColor, inactiveTintColor, active });
+    }
+
+    return content;
+  };
+
   return (
     <View style={[styles.container, style as ViewStyle]}>
       <TouchableOpacity onPress={handlePress}>
-        <View style={styles.segment}>
-          <Text
-            numberOfLines={1}
-            style={[
-              styles.segmentText,
-              active
-                ? { color: activeTintColor }
-                : { color: inactiveTintColor },
-              active && styles.segmentActiveText,
-            ]}
-          >
-            {content}
-          </Text>
-        </View>
+        <View style={styles.segment}>{renderContent()}</View>
       </TouchableOpacity>
     </View>
   );
