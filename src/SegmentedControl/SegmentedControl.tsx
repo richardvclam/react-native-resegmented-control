@@ -37,21 +37,21 @@ export const SegmentedControl = ({
   onChangeValue,
   style,
 }: SegmentedControlProps): JSX.Element => {
-  const [_width, _setWidth] = useState<number>(0);
-  const [_activeName, _setActiveName] = useState<string | undefined>(
-    initialSelectedName,
-  );
+  const [_initialized, _setInitialized] = useState(false);
+  const [_width, _setWidth] = useState(0);
+  const [_initialSelectedName] = useState(initialSelectedName);
+  const [_activeName, _setActiveName] = useState(_initialSelectedName);
   const [_sliderPosition, _setSliderPosition] = useState(
     new Animated.Value<number>(0),
   );
   const [_sliderWidth, _setSliderWidth] = useState(0);
-
   const [_map, _setMap] = useState<{ [key: string]: number } | undefined>(
     undefined,
   );
 
   const values = Array.isArray(children) ? children : [children];
 
+  // Map segment names to index
   useEffect(() => {
     const tempMap = {};
 
@@ -70,19 +70,25 @@ export const SegmentedControl = ({
     _setMap(tempMap);
   }, []);
 
+  // Set slider width
   useEffect(() => {
     _setSliderWidth(_width * (1 / values.length - 0.015));
   }, [values, _width]);
 
+  // Set initial slider position
   useEffect(() => {
     if (
-      typeof initialSelectedName !== 'undefined' &&
-      typeof _map !== 'undefined'
+      typeof _initialSelectedName !== 'undefined' &&
+      typeof _map !== 'undefined' &&
+      _width > 0 &&
+      !_initialized
     ) {
-      const index = _map[initialSelectedName];
-      _setSliderPosition(new Animated.Value(_width * (index / values.length)));
+      const index = _map[_initialSelectedName];
+      const position = _width * (index / values.length);
+      _setSliderPosition(new Animated.Value(position));
+      _setInitialized(true);
     }
-  }, [values, _width, _map, initialSelectedName]);
+  }, [values, _width, _map, _initialSelectedName]);
 
   // This hook is used to animate the slider position
   Animated.useCode(() => {
