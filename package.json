@@ -21,7 +21,8 @@
   ],
   "scripts": {
     "build": "rm -rf lib && tsc",
-    "prepare": "npm run build",
+    "prepare": "npm run test && npm run build",
+    "cov": "jest --coverage",
     "test": "jest",
     "lint": "tsc --noEmit && eslint \"{src,__tests__}/**/*.{js,jsx,ts,tsx}\" --quiet --fix"
   },

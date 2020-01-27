@@ -1,0 +1,98 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SegmentedControl should render 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#eeeeef",
+          "borderRadius": 8,
+          "flexDirection": "row",
+          "height": 28,
+          "position": "relative",
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "zIndex": 2,
+          },
+          undefined,
+        ]
+      }
+    >
+      <RNGestureHandlerButton
+        collapsable={false}
+        rippleColor={0}
+        style={
+          Array [
+            Object {
+              "overflow": "hidden",
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          accessible={true}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID="Segment_Button"
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "flexDirection": "row",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "fontSize": 13,
+                    "paddingLeft": 2,
+                    "paddingRight": 2,
+                    "textAlign": "center",
+                    "width": "100%",
+                  },
+                  Object {
+                    "color": "#000000",
+                  },
+                  false,
+                ]
+              }
+            >
+              Test
+            </Text>
+          </View>
+        </View>
+      </RNGestureHandlerButton>
+    </View>
+  </View>
+</View>
+`;
