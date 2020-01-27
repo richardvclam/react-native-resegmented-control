@@ -24,10 +24,7 @@ export interface SegmentedControlProps {
 export const SegmentedContext = createContext<{
   selectedName: string | null | undefined;
   onChange: ((name: string) => void) | undefined;
-}>({
-  selectedName: null,
-  onChange: undefined,
-});
+} | null>(null);
 
 export const SegmentedControl = ({
   activeTintColor = '#000000',

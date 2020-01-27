@@ -19,7 +19,13 @@ export const Segment = ({
   name,
   style,
 }: SegmentProps): JSX.Element => {
-  const { selectedName, onChange } = useContext(SegmentedContext);
+  const context = useContext(SegmentedContext);
+
+  if (!context) {
+    throw new Error('Segment must be used within a SegmentedControl.');
+  }
+
+  const { selectedName, onChange } = context;
 
   const active = selectedName === name;
 
@@ -58,7 +64,7 @@ export const Segment = ({
 
   return (
     <View style={[styles.container, style as ViewStyle]}>
-      <TouchableOpacity onPress={handlePress}>
+      <TouchableOpacity onPress={handlePress} testID={`Segment_Button`}>
         <View style={styles.segment}>{renderContent()}</View>
       </TouchableOpacity>
     </View>
