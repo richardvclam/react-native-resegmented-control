@@ -124,6 +124,35 @@ Style of the segment. Uses the same styles as a `View` component.
 | --------- | -------- |
 | ViewStyle | No       |
 
+## Unit Testing with Jest
+This package relies on [`react-native-reanimated`](https://github.com/software-mansion/react-native-reanimated).
+
+When rendering this component with renderers such as Jest you may see this error:
+
+```
+  ● Test suite failed to run
+
+    Invariant Violation: Native module cannot be null.
+
+      at invariant (node_modules/invariant/invariant.js:40:15)
+      at new NativeEventEmitter (node_modules/react-native/Libraries/EventEmit
+ter/NativeEventEmitter.js:36:27)
+      at Object.<anonymous> (node_modules/react-native-reanimated/src/Reanimat
+edEventEmitter.js:4:1)
+      at Object.<anonymous> (node_modules/react-native-reanimated/src/core/Ani
+matedCall.js:1:909)
+```
+
+To get around this you can use the react-native-reanimated mock. Here is how to in Jest:
+
+In your test file add this:
+
+```
+jest.mock('react-native-reanimated', () =>
+  require('react-native-reanimated/mock')
+);
+```
+
 ## To Dos
 
 - More customizable options
