@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, FC } from 'react';
 import { StyleProp, Text, View, ViewStyle } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SegmentedContext } from '../SegmentedControl/SegmentedControl';
@@ -12,13 +12,13 @@ export interface SegmentProps {
   style?: StyleProp<ViewStyle>;
 }
 
-export const Segment = ({
+export const Segment: FC<SegmentProps> = ({
   activeTintColor,
   content,
   inactiveTintColor,
   name,
   style,
-}: SegmentProps): JSX.Element => {
+}: SegmentProps) => {
   const context = useContext(SegmentedContext);
 
   if (!context) {

@@ -38,60 +38,42 @@ exports[`SegmentedControl should render 1`] = `
         ]
       }
     >
-      <RNGestureHandlerButton
-        collapsable={false}
-        rippleColor={0}
-        style={
-          Array [
-            Object {
-              "overflow": "hidden",
-            },
-            undefined,
-          ]
-        }
+      <TouchableOpacity
+        activeOpacity={0.2}
+        testID="Segment_Button"
       >
         <View
-          accessible={true}
           style={
             Object {
-              "opacity": 1,
+              "alignItems": "center",
+              "flex": 1,
+              "flexDirection": "row",
+              "justifyContent": "center",
             }
           }
-          testID="Segment_Button"
         >
-          <View
+          <Text
+            numberOfLines={1}
             style={
-              Object {
-                "alignItems": "center",
-                "flex": 1,
-                "flexDirection": "row",
-                "justifyContent": "center",
-              }
+              Array [
+                Object {
+                  "fontSize": 13,
+                  "paddingLeft": 2,
+                  "paddingRight": 2,
+                  "textAlign": "center",
+                  "width": "100%",
+                },
+                Object {
+                  "color": "#000000",
+                },
+                false,
+              ]
             }
           >
-            <Text
-              numberOfLines={1}
-              style={
-                Array [
-                  Object {
-                    "fontSize": 13,
-                    "paddingLeft": 2,
-                    "paddingRight": 2,
-                    "textAlign": "center",
-                    "width": "100%",
-                  },
-                  Object {
-                    "color": "#000000",
-                  },
-                  false,
-                ]
-              }
-            >
-              Test
-            </Text>
-          </View>
+            Test
+          </Text>
         </View>
-      </RNGestureHandlerButton>
+      </TouchableOpacity>
     </View>
   </View>
 </View>

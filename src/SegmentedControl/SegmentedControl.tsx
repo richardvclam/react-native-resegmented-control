@@ -139,6 +139,7 @@ export const SegmentedControl = ({
         >
           {typeof _activeName !== 'undefined' && (
             <Animated.View
+              testID="SegmentedControl_Slider"
               style={[
                 styles.slider,
                 {
