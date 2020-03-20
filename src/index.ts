@@ -1,2 +1,2 @@
 export { SegmentedControl, SegmentedControlProps } from './SegmentedControl';
-export { Segment, SegmentProps } from './Segment';
+export { Segment, SegmentProps, SegmentContentProps } from './Segment';

@@ -1,8 +1,8 @@
-import React from 'react';
-import { View } from 'react-native';
+import React, { ReactElement } from 'react';
+import { Text, View } from 'react-native';
 import { fireEvent, render } from '@testing-library/react-native';
 import { SegmentedControl } from '../src/SegmentedControl';
-import { Segment } from '../src/Segment';
+import { Segment, SegmentContentProps } from '../src/Segment';
 
 jest.mock('react-native-reanimated', () =>
   require('react-native-reanimated/mock'),
@@ -45,14 +45,23 @@ describe('SegmentedControl', () => {
   });
 
   it('should render initially with slider on `Second`', async () => {
+    let activeSegment = null;
+
+    const SpyContent = ({ active }: SegmentContentProps): ReactElement => {
+      activeSegment = active;
+
+      return <Text>Second</Text>;
+    };
+
     const { getByTestId } = render(
       <SegmentedControl initialSelectedName="second">
         <Segment name="first" content="First" />
-        <Segment name="second" content="Second" />
+        <Segment name="second" content={SpyContent} />
       </SegmentedControl>,
     );
 
     expect(getByTestId('SegmentedControl_Slider')).toBeDefined();
+    expect(activeSegment).toBe(true);
   });
 
   it('should call onChangeValue when pressed on `Test`', async () => {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Text } from 'react-native';
 import { render } from '@testing-library/react-native';
 import { SegmentedControl, Segment } from '../src';
 
@@ -26,5 +27,25 @@ describe('SegmentedControl', () => {
     );
 
     expect(getByText('Test')).toBeDefined();
+  });
+
+  it('should render when content is a function', () => {
+    const { getByText } = render(
+      <SegmentedControl>
+        <Segment name="Test" content={() => <Text>Function</Text>} />
+      </SegmentedControl>,
+    );
+
+    expect(getByText('Function')).toBeDefined();
+  });
+
+  it('should render when content is an element', () => {
+    const { getByText } = render(
+      <SegmentedControl>
+        <Segment name="Test" content={<Text>Element</Text>} />
+      </SegmentedControl>,
+    );
+
+    expect(getByText('Element')).toBeDefined();
   });
 });

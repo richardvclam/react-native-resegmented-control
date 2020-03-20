@@ -4,6 +4,12 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SegmentedContext } from '../SegmentedControl/SegmentedControl';
 import styles from './SegmentStyles';
 
+export interface SegmentContentProps {
+  activeTintColor: string;
+  inactiveTintColor: string;
+  active: boolean;
+}
+
 export interface SegmentProps {
   activeTintColor?: string;
   content: React.ReactNode;
