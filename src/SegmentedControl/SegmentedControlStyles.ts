@@ -13,6 +13,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: 0,
+    zIndex: 1,
+  },
+  sliderDefault: {
     height: '86%',
     backgroundColor: 'white',
     borderRadius: 7,
@@ -21,7 +24,6 @@ const styles = StyleSheet.create({
     shadowColor: '#a2a2a2',
     shadowOpacity: 0.5,
     shadowRadius: 2,
-    zIndex: 1,
   },
   dividerContainer: {
     paddingTop: 7,

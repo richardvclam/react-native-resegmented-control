@@ -1,11 +1,9 @@
-import React, { createContext, useState, useEffect } from 'react';
-import { LayoutChangeEvent, StyleProp, View, ViewStyle } from 'react-native';
+import React, { createContext, useEffect, useState } from 'react';
+import { LayoutChangeEvent, View, ViewStyle } from 'react-native';
+import { PanGestureHandler, PanGestureHandlerGestureEvent } from 'react-native-gesture-handler';
 import Animated, { Easing } from 'react-native-reanimated';
 import { timing } from 'react-native-redash';
-import {
-  PanGestureHandler,
-  PanGestureHandlerGestureEvent,
-} from 'react-native-gesture-handler';
+
 import { Segment, SegmentProps } from '../Segment';
 import { clamp } from '../utils';
 import styles from './SegmentedControlStyles';
@@ -18,7 +16,8 @@ export interface SegmentedControlProps {
     | React.ReactElement<SegmentProps>
     | React.ReactElement<SegmentProps>[];
   onChangeValue?: (name: string) => void;
-  style?: StyleProp<ViewStyle>;
+  sliderStyle?: ViewStyle;
+  style?: ViewStyle;
 }
 
 export const SegmentedContext = createContext<{
@@ -32,6 +31,7 @@ export const SegmentedControl = ({
   inactiveTintColor = '#000000',
   initialSelectedName,
   onChangeValue,
+  sliderStyle,
   style,
 }: SegmentedControlProps): JSX.Element => {
   const [_initialized, _setInitialized] = useState(false);
@@ -133,15 +133,12 @@ export const SegmentedControl = ({
       value={{ selectedName: _activeName, onChange: handleChangeValue }}
     >
       <PanGestureHandler onGestureEvent={handleGestureEvent}>
-        <View
-          onLayout={handleLayout}
-          style={[styles.container, style as ViewStyle]}
-        >
+        <View onLayout={handleLayout} style={[styles.container, style]}>
           {typeof _activeName !== 'undefined' && (
             <Animated.View
               testID="SegmentedControl_Slider"
               style={[
-                styles.slider,
+                styles.sliderDefault,
                 {
                   width: _sliderWidth,
                   transform: [
@@ -150,6 +147,8 @@ export const SegmentedControl = ({
                     },
                   ],
                 },
+                sliderStyle,
+                styles.slider,
               ]}
             />
           )}
