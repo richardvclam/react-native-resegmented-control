@@ -1,6 +1,6 @@
 {
   "name": "react-native-resegmented-control",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "description": "A fully customizable, declarative component that mimics the design of UISegmentedControl from iOS 13. Supported on iOS and Android",
   "keywords": [
     "react-native",
