@@ -90,6 +90,14 @@ Callback that is called when the user taps a segment. Passes the `name` of the `
 function onChangeValue(name: string): void {}
 ```
 
+### `sliderStyle`
+
+Style of the slider. Uses the same styles as a `View` component.
+
+| Type      | Required |
+| --------- | -------- |
+| ViewStyle | No       |
+
 ### `style`
 
 Style of the segmented control. Uses the same styles as a `View` component.
@@ -125,6 +133,7 @@ Style of the segment. Uses the same styles as a `View` component.
 | ViewStyle | No       |
 
 ## Unit Testing with Jest
+
 This package relies on [`react-native-reanimated`](https://github.com/software-mansion/react-native-reanimated).
 
 When rendering this component with renderers such as Jest you may see this error:
