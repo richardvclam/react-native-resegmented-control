@@ -1,10 +1,11 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { LayoutChangeEvent, View, ViewStyle } from 'react-native';
 import { PanGestureHandler, PanGestureHandlerGestureEvent } from 'react-native-gesture-handler';
 import Animated, { Easing } from 'react-native-reanimated';
 import { timing } from 'react-native-redash';
 
 import { Segment, SegmentProps } from '../Segment';
+import { SegmentedContext } from '../SegmentedContext';
 import { clamp } from '../utils';
 import styles from './SegmentedControlStyles';
 
@@ -19,11 +20,6 @@ export interface SegmentedControlProps {
   sliderStyle?: ViewStyle;
   style?: ViewStyle;
 }
-
-export const SegmentedContext = createContext<{
-  selectedName: string | null | undefined;
-  onChange: ((name: string) => void) | undefined;
-} | null>(null);
 
 export const SegmentedControl = ({
   activeTintColor = '#000000',

@@ -1,7 +1,8 @@
-import React, { useContext, FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { StyleProp, Text, View, ViewStyle } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { SegmentedContext } from '../SegmentedControl/SegmentedControl';
+
+import { SegmentedContext } from '../SegmentedContext';
 import styles from './SegmentStyles';
 
 export interface SegmentContentProps {
