@@ -9,7 +9,7 @@ export interface DividerProps {
   hide?: boolean;
 }
 
-export function Divider({ hide = false }: DividerProps): JSX.Element {
+function _Divider({ hide = false }: DividerProps): JSX.Element {
   const opacity = React.useRef(new Animated.Value<number>(hide ? 0 : 1));
 
   Animated.useCode(() => {
@@ -32,3 +32,5 @@ export function Divider({ hide = false }: DividerProps): JSX.Element {
     </Animated.View>
   );
 }
+
+export const Divider = React.memo(_Divider);
