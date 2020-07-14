@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     zIndex: 2,
   },
+  disabled: {
+    opacity: 0.5,
+  },
   segment: {
     flex: 1,
     flexDirection: 'row',

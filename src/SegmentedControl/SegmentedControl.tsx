@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { LayoutChangeEvent, View, ViewStyle } from 'react-native';
-import { PanGestureHandler, PanGestureHandlerGestureEvent } from 'react-native-gesture-handler';
+import {
+  PanGestureHandler,
+  PanGestureHandlerGestureEvent
+} from 'react-native-gesture-handler';
 import Animated, { Easing } from 'react-native-reanimated';
 import { timing } from 'react-native-redash';
 
@@ -11,11 +14,13 @@ import styles from './SegmentedControlStyles';
 
 export interface SegmentedControlProps {
   activeTintColor?: string;
-  inactiveTintColor?: string;
-  initialSelectedName?: string;
   children:
     | React.ReactElement<SegmentProps>
     | React.ReactElement<SegmentProps>[];
+  disabled?: boolean;
+  disabledStyle?: ViewStyle;
+  inactiveTintColor?: string;
+  initialSelectedName?: string;
   onChangeValue?: (name: string) => void;
   sliderStyle?: ViewStyle;
   style?: ViewStyle;
@@ -24,6 +29,8 @@ export interface SegmentedControlProps {
 export const SegmentedControl = ({
   activeTintColor = '#000000',
   children,
+  disabled = false,
+  disabledStyle,
   inactiveTintColor = '#000000',
   initialSelectedName,
   onChangeValue,
@@ -115,6 +122,8 @@ export const SegmentedControl = ({
   };
 
   const handleGestureEvent = (event: PanGestureHandlerGestureEvent): void => {
+    if (disabled) return;
+
     const { x } = event.nativeEvent;
 
     const calculatedIndex = Math.floor((x / _width) * values.length);
@@ -126,10 +135,21 @@ export const SegmentedControl = ({
 
   return (
     <SegmentedContext.Provider
-      value={{ selectedName: _activeName, onChange: handleChangeValue }}
+      value={{
+        selectedName: _activeName,
+        onChange: handleChangeValue,
+      }}
     >
       <PanGestureHandler onGestureEvent={handleGestureEvent}>
-        <View onLayout={handleLayout} style={[styles.container, style]}>
+        <View
+          onLayout={handleLayout}
+          style={[
+            styles.container,
+            style,
+            disabled && styles.disabledContainer,
+            disabled && disabledStyle,
+          ]}
+        >
           {typeof _activeName !== 'undefined' && (
             <Animated.View
               testID="SegmentedControl_Slider"
@@ -159,9 +179,10 @@ export const SegmentedControl = ({
               {{
                 ...child,
                 props: {
-                  ...child.props,
+                  disabled,
                   inactiveTintColor,
                   activeTintColor,
+                  ...child.props,
                 },
               }}
             </React.Fragment>

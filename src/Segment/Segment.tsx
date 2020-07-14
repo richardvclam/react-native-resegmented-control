@@ -6,14 +6,17 @@ import { SegmentedContext } from '../SegmentedContext';
 import styles from './SegmentStyles';
 
 export interface SegmentContentProps {
-  activeTintColor: string;
-  inactiveTintColor: string;
   active: boolean;
+  activeTintColor: string;
+  disabled: boolean;
+  inactiveTintColor: string;
 }
 
 export interface SegmentProps {
   activeTintColor?: string;
   content: React.ReactNode;
+  disabled?: boolean;
+  disabledStyle?: ViewStyle;
   inactiveTintColor?: string;
   name: string;
   style?: StyleProp<ViewStyle>;
@@ -22,6 +25,8 @@ export interface SegmentProps {
 export const Segment: FC<SegmentProps> = ({
   activeTintColor,
   content,
+  disabled,
+  disabledStyle,
   inactiveTintColor,
   name,
   style,
@@ -63,15 +68,26 @@ export const Segment: FC<SegmentProps> = ({
     }
 
     if (typeof content === 'function') {
-      return content({ activeTintColor, inactiveTintColor, active });
+      return content({ activeTintColor, inactiveTintColor, active, disabled });
     }
 
     return content;
   };
 
   return (
-    <View style={[styles.container, style as ViewStyle]}>
-      <TouchableOpacity onPress={handlePress} testID={`Segment_Button`}>
+    <View
+      style={[
+        styles.container,
+        style as ViewStyle,
+        disabled && styles.disabled,
+        disabled && disabledStyle,
+      ]}
+    >
+      <TouchableOpacity
+        disabled={disabled}
+        onPress={handlePress}
+        testID={`Segment_Button`}
+      >
         <View style={styles.segment}>{renderContent()}</View>
       </TouchableOpacity>
     </View>

@@ -63,6 +63,22 @@ Color of the active content.
 | ------ | -------- | --------- |
 | string | No       | `#000000` |
 
+### `disabled`
+
+Disable the segmented control.
+
+| Type    | Required | Default |
+| ------- | -------- | ------- |
+| boolean | No       | false   |
+
+### `disabledStyle`
+
+Style of the disabled segmented control. Uses the same styles as a `View` component.
+
+| Type      | Required | Default            |
+| --------- | -------- | ------------------ |
+| ViewStyle | No       | `{ opacity: 0.5 }` |
+
 ### `inactiveTintColor`
 
 Color of the inactive content.
@@ -116,6 +132,22 @@ Element for the segment.
 | Type    | Required |
 | ------- | -------- |
 | Element | Yes      |
+
+### `disabled`
+
+Disable the segment.
+
+| Type    | Required | Default |
+| ------- | -------- | ------- |
+| boolean | No       | false   |
+
+### `disabledStyle`
+
+Style of the disabled segment. Uses the same styles as a `View` component.
+
+| Type      | Required | Default            |
+| --------- | -------- | ------------------ |
+| ViewStyle | No       | `{ opacity: 0.5 }` |
 
 ### `name`
 
