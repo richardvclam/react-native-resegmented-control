@@ -23,6 +23,8 @@ exports[`SegmentedControl should render 1`] = `
           "position": "relative",
         },
         undefined,
+        false,
+        false,
       ]
     }
   >
@@ -35,11 +37,14 @@ exports[`SegmentedControl should render 1`] = `
             "zIndex": 2,
           },
           undefined,
+          false,
+          false,
         ]
       }
     >
       <TouchableOpacity
         activeOpacity={0.2}
+        disabled={false}
         testID="Segment_Button"
       >
         <View

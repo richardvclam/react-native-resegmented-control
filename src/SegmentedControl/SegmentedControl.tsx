@@ -18,7 +18,7 @@ export interface SegmentedControlProps {
     | React.ReactElement<SegmentProps>
     | React.ReactElement<SegmentProps>[];
   disabled?: boolean;
-  disabledStyle: ViewStyle;
+  disabledStyle?: ViewStyle;
   inactiveTintColor?: string;
   initialSelectedName?: string;
   onChangeValue?: (name: string) => void;
