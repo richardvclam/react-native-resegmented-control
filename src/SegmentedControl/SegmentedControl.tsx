@@ -7,6 +7,7 @@ import {
 import Animated, { Easing } from 'react-native-reanimated';
 import { timing } from 'react-native-redash';
 
+import { Divider } from '../Divider';
 import { Segment, SegmentProps } from '../Segment';
 import { SegmentedContext } from '../SegmentedContext';
 import { clamp } from '../utils';
@@ -133,6 +134,8 @@ export const SegmentedControl = ({
     handleChangeValue(name);
   };
 
+  const currentIndex = _map?.[_activeName || ''] ?? -1;
+
   return (
     <SegmentedContext.Provider
       value={{
@@ -169,24 +172,26 @@ export const SegmentedControl = ({
             />
           )}
 
-          {values.map((child, index) => (
-            <React.Fragment key={child.props.name}>
-              {index > 0 && (
-                <View style={styles.dividerContainer}>
-                  <View style={styles.divider} />
-                </View>
-              )}
-              {{
-                ...child,
-                props: {
-                  disabled,
-                  inactiveTintColor,
-                  activeTintColor,
-                  ...child.props,
-                },
-              }}
-            </React.Fragment>
-          ))}
+          {values.map((child, index) => {
+            return (
+              <React.Fragment key={child.props.name}>
+                {index > 0 && (
+                  <Divider
+                    hide={currentIndex !== index && currentIndex !== index - 1}
+                  />
+                )}
+                {{
+                  ...child,
+                  props: {
+                    disabled,
+                    inactiveTintColor,
+                    activeTintColor,
+                    ...child.props,
+                  },
+                }}
+              </React.Fragment>
+            );
+          })}
         </View>
       </PanGestureHandler>
     </SegmentedContext.Provider>
