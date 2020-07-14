@@ -129,9 +129,9 @@ Style of the segmented control. Uses the same styles as a `View` component.
 
 Element for the segment.
 
-| Type    | Required |
-| ------- | -------- |
-| Element | Yes      |
+| Type              | Required | Props                                                        |
+| ----------------- | -------- | ------------------------------------------------------------ |
+| Element, Function | Yes      | `active`, `activeTintColor`, `disabled`, `inactiveTintColor` |
 
 ### `disabled`
 
