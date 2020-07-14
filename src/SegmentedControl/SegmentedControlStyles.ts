@@ -9,6 +9,9 @@ const styles = StyleSheet.create({
     height: 28,
     position: 'relative',
   },
+  disabledContainer: {
+    opacity: 0.5,
+  },
   slider: {
     position: 'absolute',
     top: 0,
